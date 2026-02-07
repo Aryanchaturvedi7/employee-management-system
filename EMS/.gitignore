@@ -1,0 +1,17 @@
+# Backend
+bin/
+obj/
+.vs/
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# Environment files
+appsettings.Development.json
+.env
+
+# OS junk
+.DS_Store
+Thumbs.db
