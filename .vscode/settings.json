@@ -1,0 +1,28 @@
+{
+    "dbcode.connections": [
+        {
+            "connectionId": "TOcbZOyYNgTnefJXMbgmk",
+            "name": "EMS_DB",
+            "driver": "mysql",
+            "connectionType": "host",
+            "host": "Mysql@localhost",
+            "port": 3306,
+            "ssl": false,
+            "username": "root",
+            "password": "",
+            "savePassword": "secretStorage",
+            "database": "emsdb",
+            "readOnly": false,
+            "postConnectionSqlType": "inline",
+            "connectionTimeout": 30,
+            "pinnedConnectionTimeout": "0",
+            "driverOptions": {
+                "retrievePublickey": true,
+                "disableMultiStatements": false
+            },
+            "introspection": {
+                "progressive": false
+            }
+        }
+    ]
+}

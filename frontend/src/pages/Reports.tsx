@@ -44,7 +44,7 @@ export default function Reports() {
     }
   };
 
-  const downloadEmployeePDF = async () => {
+ const downloadEmployeePDF = async () => {
   const res = await api.get("/report/employees/pdf", {
     responseType: "blob",
   });

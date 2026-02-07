@@ -103,25 +103,32 @@ public class ReportController : ControllerBase
     {
         var employees = await _employeeService.GetAllAsync();
 
-        var pdf = Document.Create(container =>
+        if (employees == null || employees.Count == 0)
+            return BadRequest("No employees found");
+
+        var pdfBytes = Document.Create(container =>
         {
             container.Page(page =>
             {
                 page.Margin(30);
 
-                page.Header().Text("Employee Directory Report")
-                    .FontSize(20).Bold();
+                page.Header()
+                    .Text("Employee Directory Report")
+                    .FontSize(20)
+                    .Bold()
+                    .AlignCenter();
 
-                page.Content().Table(table =>
+                page.Content().PaddingVertical(10).Table(table =>
                 {
                     table.ColumnsDefinition(columns =>
                     {
-                        columns.ConstantColumn(50);
+                        columns.ConstantColumn(40);
                         columns.RelativeColumn();
                         columns.RelativeColumn();
                         columns.RelativeColumn();
                     });
 
+                    // Header Row
                     table.Header(header =>
                     {
                         header.Cell().Text("ID").Bold();
@@ -130,6 +137,7 @@ public class ReportController : ControllerBase
                         header.Cell().Text("Salary").Bold();
                     });
 
+                    // Data Rows
                     foreach (var emp in employees)
                     {
                         table.Cell().Text(emp.Id.ToString());
@@ -138,10 +146,15 @@ public class ReportController : ControllerBase
                         table.Cell().Text(emp.Salary.ToString());
                     }
                 });
+
+                page.Footer()
+                    .AlignCenter()
+                    .Text($"Generated on {DateTime.Now:dd-MMM-yyyy}");
             });
         }).GeneratePdf();
 
-        return File(pdf, "application/pdf", "EmployeeReport.pdf");
+        return File(pdfBytes, "application/pdf", "EmployeeReport.pdf");
     }
+
 
 }

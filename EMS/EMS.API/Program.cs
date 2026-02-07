@@ -6,6 +6,10 @@ using System.Text;
 using EMS.Application.Interfaces;
 using EMS.Application.Services;
 using EMS.Infrastructure.Repositories;
+using QuestPDF.Infrastructure;
+
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 
 var builder = WebApplication.CreateBuilder(args);
